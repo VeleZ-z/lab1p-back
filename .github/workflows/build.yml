@@ -7,7 +7,7 @@ on:
   push:
     branches:
       - main
-  jobs:
+jobs:
   #Test's job
   tests:
     name: Unit tests
