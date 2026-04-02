@@ -119,31 +119,13 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-
-      - name: Cache Maven packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
       - name: Run Snyk
-        uses: snyk/actions/maven-3-jdk-21@master
+        uses: snyk/actions/setup@master
+
+      - name: Snyk test
+        run: snyk test --sarif-file-output=snyk.sarif
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --sarif-file-output=snyk.sarif
-
-      - name: Upload SARIF
-        uses: github/codeql-action/upload-sarif@v3
-        if: always() && hashFiles('snyk.sarif') != ''
-        with:
-          sarif_file: snyk.sarif
 
   #Build's job
   build:
