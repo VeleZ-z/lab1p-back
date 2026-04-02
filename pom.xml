@@ -156,5 +156,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>lab1p</finalName>
 	</build>
 </project>
