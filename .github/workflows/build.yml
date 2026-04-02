@@ -118,13 +118,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-
+      #Set up JDK 21
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
-
+      #Set up Maven cache
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
@@ -142,8 +142,8 @@ jobs:
           args: --sarif-file-output=snyk.sarif
 
       - name: Upload result to GitHub Code Scanning
-        if: always() && fileExists('snyk.sarif')
-        uses: github/codeql-action/upload-sarif@v4
+        uses: github/codeql-action/upload-sarif@v3
+        if: success() || failure()
         with:
           sarif_file: snyk.sarif
 
