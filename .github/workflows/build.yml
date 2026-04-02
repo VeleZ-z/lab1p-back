@@ -133,7 +133,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Run Snyk
-        uses: snyk/actions/maven-3-jdk-21@v3
+        uses: snyk/actions/maven-3-jdk-21@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
