@@ -130,7 +130,7 @@
 					<!-- attached to Maven test phase -->
 					<execution>
 						<id>report</id>
-						<phase>test</phase>
+						<phase>verify</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>
@@ -142,9 +142,6 @@
 				<groupId>org.eluder.coveralls</groupId>
 				<artifactId>coveralls-maven-plugin</artifactId>
 				<version>4.3.0</version>
-				<configuration>
-					<repoToken>${{ secrets.COVERALLS_REPO_TOKEN }}</repoToken>
-				</configuration>
 			</plugin>
 
 			<plugin>
