@@ -105,4 +105,6 @@ jobs:
         run: mvn clean verify coveralls:report
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          CI_NAME: github
+          CI_BUILD_NUMBER: ${{ github.run_id }}
+          CI_BUILD_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
