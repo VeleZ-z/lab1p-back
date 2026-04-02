@@ -129,18 +129,10 @@ jobs:
       - name: Install project
         run: mvn -B clean install -DskipTests
 
-      - name: Generate dependency tree
-        run: mvn dependency:tree -DoutputFile=deps.txt
-
-      - name: Verify tools
-        run: |
-          echo "JAVA_HOME: $JAVA_HOME"
-          java -version
-          which mvn
-          mvn -version
-
       - name: Install Snyk CLI
-        run: npm install -g snyk
+        run: |
+          npm install -g snyk
+          snyk --version
 
       - name: Authenticate Snyk
         run: snyk auth $SNYK_TOKEN
@@ -151,26 +143,11 @@ jobs:
         run: |
           snyk test \
             --file=pom.xml \
-            --package-manager=maven \
             --sarif-file-output=snyk.sarif
         continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
           JAVA_HOME: ${{ env.JAVA_HOME }}
-          M2_HOME: /opt/hostedtoolcache/Java_Temurin_Hotspot_jdk/21*/x64
-          PATH: /opt/hostedtoolcache/Java_Temurin_Hotspot_jdk/21*/x64/bin:${{ env.PATH }}
-
-      - name: Debug SARIF
-        if: always()
-        run: |
-          echo "JAVA_HOME: $JAVA_HOME"
-          echo "Java version:"
-          java -version
-          echo "mvn location:"
-          which mvn || echo "mvn no encontrado"
-          echo "---"
-          ls -la
-          cat snyk.sarif 2>/dev/null || echo "No se generó snyk.sarif"
 
       - name: Upload SARIF
         uses: github/codeql-action/upload-sarif@v3
