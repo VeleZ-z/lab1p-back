@@ -129,7 +129,7 @@ jobs:
         run: mvn -B package -DskipTests
 
       - name: Setup Snyk
-        uses: snyk/actions/setup@v1
+        uses: snyk/actions/maven@master
 
       - name: Authenticate Snyk
         run: snyk auth $SNYK_TOKEN
