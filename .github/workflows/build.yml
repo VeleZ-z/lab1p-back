@@ -132,7 +132,7 @@ jobs:
 
       #  instalar snyk (versión estable)
       - name: Setup Snyk
-        uses: snyk/actions/setup@v3
+        uses: snyk/actions/setup@v1
 
       #  autenticación
       - name: Authenticate Snyk
