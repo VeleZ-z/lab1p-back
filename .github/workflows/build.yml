@@ -7,11 +7,6 @@ on:
   push:
     branches:
       - main
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-
 jobs:
   #Test's job
   tests:
@@ -73,3 +68,6 @@ jobs:
         #Analyze project with SonarCloud
       - name: Analyze with SonarCloud
         run: mvn -B verify sonar:sonar -Dsonar.projectKey=VeleZ-z_lab1p-back -Dsonar.organization=velez-z -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=$SONAR_TOKEN
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
