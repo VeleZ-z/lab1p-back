@@ -5,10 +5,8 @@ Implementation of a Simple Banking App with the next operations:
 
 * Get all customers
 * Get customer by ID
-* Create a new customer
 * Transfer money between accounts
 * Get transactions by account number
-* health check (Spring Boot default)
 
 Including integration with GitHub Actions for CI/CD and unit testing.
 
